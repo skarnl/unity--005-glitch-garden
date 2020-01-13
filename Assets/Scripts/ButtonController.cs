@@ -15,6 +15,11 @@ public class ButtonController : MonoBehaviour
         defenderSpawner = FindObjectOfType<DefenderSpawner>();
     }
 
+    private void Start()
+	{
+        SelectButton(buttonsList[0]);
+    }
+
     public void SetButtonActive (int index) {
         var buttonIndex = 0;
 
@@ -22,12 +27,17 @@ public class ButtonController : MonoBehaviour
             button.Deselect();
 
             if (buttonIndex == index) {
-                button.Select();
-
-                defenderSpawner.SetSelectedPrefab(button.GetPrefab());
+                SelectButton(button);
             }
             
             buttonIndex++;
         }
+    }
+
+    private void SelectButton(DefenderButton button)
+	{
+        button.Select();
+
+        defenderSpawner.SetSelectedPrefab(button.GetPrefab());
     }
 }
