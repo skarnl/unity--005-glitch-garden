@@ -9,10 +9,12 @@ public class ButtonController : MonoBehaviour
     private List<DefenderButton> buttonsList = new List<DefenderButton>();
 
     private DefenderSpawner defenderSpawner;
+    private StarController starController;
 
     private void Awake ()
     {
         defenderSpawner = FindObjectOfType<DefenderSpawner>();
+        starController = FindObjectOfType<StarController>();
     }
 
     private void Start()
@@ -39,5 +41,6 @@ public class ButtonController : MonoBehaviour
         button.Select();
 
         defenderSpawner.SetSelectedPrefab(button.GetPrefab());
+        starController.SetSelectedDefenderCost(button.GetStarCost());
     }
 }

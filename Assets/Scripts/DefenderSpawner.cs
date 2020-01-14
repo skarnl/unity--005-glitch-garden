@@ -10,6 +10,13 @@ public class DefenderSpawner : Singleton
 
     private List<Vector2> defenderGridPositions = new List<Vector2>();
 
+    private StarController starController;
+
+    private void Awake ()
+    {
+        starController = FindObjectOfType<StarController>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -17,18 +24,19 @@ public class DefenderSpawner : Singleton
             var viewportPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             if (viewportPosition.x > 0.5f && viewportPosition.x < 9.5f && viewportPosition.y > 0.5f && viewportPosition.y < 5.5f) {
+
                 var clickedPosition = new Vector2(
                     Mathf.RoundToInt(viewportPosition.x),
                     Mathf.RoundToInt(viewportPosition.y)
                 );
                 
 
-                if (!defenderGridPositions.Contains(clickedPosition)) {
-                    defenderGridPositions.Add(clickedPosition);
-
-                    Instantiate(defenderToSpawn, clickedPosition, Quaternion.identity);
+                if (!defenderGridPositions.Contains(clickedPosition) && starController.PayIfHasEnoughStars()) {
+                        defenderGridPositions.Add(clickedPosition);
+                        
+                        Instantiate(defenderToSpawn, clickedPosition, Quaternion.identity);
+                    }
                 }
-            }
         }   
     }
 

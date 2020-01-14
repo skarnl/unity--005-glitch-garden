@@ -8,6 +8,9 @@ public class DefenderButton : MonoBehaviour
     private GameObject defenderPrefab;
 
     [SerializeField]
+    private int starCost = 30;
+
+    [SerializeField]
     private ButtonController buttonController;
 
     [SerializeField]
@@ -44,5 +47,10 @@ public class DefenderButton : MonoBehaviour
     public GameObject GetPrefab()
     {
         return defenderPrefab;
+    }
+
+    public int GetStarCost()
+    {
+        return starCost;
     }
 }
